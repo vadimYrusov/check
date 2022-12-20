@@ -4,9 +4,11 @@ import org.example.model.DiscountCard;
 import org.example.model.Product;
 import org.example.repository.DiscountCardRepository;
 import org.example.service.serviceInterface.DiscountCardServiceAbstract;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DiscountCardService implements DiscountCardServiceAbstract {
 
     private final DiscountCardRepository discountCardRepository;
