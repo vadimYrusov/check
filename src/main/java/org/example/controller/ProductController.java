@@ -1,10 +1,9 @@
 package org.example.controller;
 
 import org.example.model.Product;
-import org.example.service.serviceInterface.ProductServiceAbstract;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.service.serviceInterface.ProductServiceInterface;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,15 +11,37 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    private final ProductServiceAbstract productServiceAbstract;
+    private final ProductServiceInterface productServiceInterface;
 
-    public ProductController(ProductServiceAbstract productServiceAbstract) {
-        this.productServiceAbstract = productServiceAbstract;
+    public ProductController(ProductServiceInterface productServiceAbstract) {
+        this.productServiceInterface = productServiceAbstract;
     }
 
     @GetMapping
     public List<Product> findAll() {
-        return productServiceAbstract.findAll();
+        return productServiceInterface.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Product findProductById(@PathVariable Long id) throws ClassNotFoundException {
+        return productServiceInterface.getProductById(id);
+    }
+
+    @PostMapping("/new")
+    public HttpStatus createProduct(@RequestBody Product product) {
+        productServiceInterface.create(product);
+        return HttpStatus.CREATED;
+    }
+
+    @PostMapping("/update/{id}")
+    public HttpStatus updateProduct(@RequestBody Product product, Long id) throws ClassNotFoundException {
+        productServiceInterface.update(product, id);
+        return HttpStatus.OK;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public HttpStatus deleteProduct(@PathVariable long id) throws ClassNotFoundException {
+        productServiceInterface.delete(id);
+        return HttpStatus.OK;
+    }
 }

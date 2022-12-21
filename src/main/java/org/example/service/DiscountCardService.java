@@ -1,15 +1,14 @@
 package org.example.service;
 
 import org.example.model.DiscountCard;
-import org.example.model.Product;
 import org.example.repository.DiscountCardRepository;
-import org.example.service.serviceInterface.DiscountCardServiceAbstract;
+import org.example.service.serviceInterface.DiscountCardServiceInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DiscountCardService implements DiscountCardServiceAbstract {
+public class DiscountCardService implements DiscountCardServiceInterface {
 
     private final DiscountCardRepository discountCardRepository;
 

@@ -1,11 +1,10 @@
 package org.example.service.serviceInterface;
 
 import org.example.model.DiscountCard;
-import org.example.model.Product;
 
 import java.util.List;
 
-public interface DiscountCardServiceAbstract {
+public interface DiscountCardServiceInterface {
 
     List<DiscountCard> findAll();
 

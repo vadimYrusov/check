@@ -4,7 +4,7 @@ import org.example.model.Product;
 
 import java.util.List;
 
-public interface ProductServiceAbstract {
+public interface ProductServiceInterface {
 
     List<Product> findAll();
 
