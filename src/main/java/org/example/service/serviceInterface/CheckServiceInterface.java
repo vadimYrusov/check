@@ -8,9 +8,16 @@ import java.util.List;
 
 public interface CheckServiceInterface {
 
-    Check getCheck();
+    List<Check> findAll();
+
+    Check getCheckById(Long id) throws ClassNotFoundException;
+
+    Check create (Check check);
+
+    Check update(Check check, Long id) throws ClassNotFoundException;
+
+    void delete (Long id) throws ClassNotFoundException;
 
     Check addProduct (Product product);
 
-    void delete (Long id) throws ClassNotFoundException;
 }

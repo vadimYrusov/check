@@ -14,6 +14,8 @@ public class Check {
     @Id
     private Long id;
 
+    private Long sum;
+
 //    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 //    @JoinTable(
 //            name = "check_product",
