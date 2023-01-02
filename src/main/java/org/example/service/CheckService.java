@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.model.Check;
 
+import org.example.model.DiscountCard;
 import org.example.model.Product;
 import org.example.repository.CheckRepository;
 import org.example.service.serviceInterface.CheckServiceInterface;
@@ -58,7 +59,22 @@ public class CheckService implements CheckServiceInterface {
     }
 
     @Override
-    public Check addProduct(Product product) {
-        return null;
+    public void addProduct(Product product, Long id) throws ClassNotFoundException {
+        if (checkRepository.findById(id).isPresent()) {
+            checkRepository.findById(id).get().getProducts().add(product);
+        } else {
+            throw new ClassNotFoundException("Check with this id not found");
+        }
+    }
+
+    @Override
+    public void addCard(DiscountCard card, Long id) throws ClassNotFoundException {
+        if (checkRepository.findById(id).isPresent()) {
+            DiscountCard existCard = checkRepository.findById(id).get().getDiscountCard();
+            existCard.setCardNumber(card.getCardNumber());
+            existCard.setId(card.getId());
+        } else {
+            throw new ClassNotFoundException("Check with this id not found");
+        }
     }
 }
