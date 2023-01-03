@@ -5,6 +5,8 @@ import org.example.model.Check;
 import org.example.model.DiscountCard;
 import org.example.model.Product;
 import org.example.repository.CheckRepository;
+import org.example.repository.DiscountCardRepository;
+import org.example.repository.ProductRepository;
 import org.example.service.serviceInterface.CheckServiceInterface;
 
 import java.util.List;
@@ -13,8 +15,14 @@ public class CheckService implements CheckServiceInterface {
 
     private final CheckRepository checkRepository;
 
-    public CheckService(CheckRepository checkRepository) {
+    private final ProductRepository productRepository;
+
+    private final DiscountCardRepository discountCardRepository;
+
+    public CheckService(CheckRepository checkRepository, ProductRepository productRepository, DiscountCardRepository discountCardRepository) {
         this.checkRepository = checkRepository;
+        this.productRepository = productRepository;
+        this.discountCardRepository = discountCardRepository;
     }
 
 
@@ -76,5 +84,24 @@ public class CheckService implements CheckServiceInterface {
         } else {
             throw new ClassNotFoundException("Check with this id not found");
         }
+    }
+
+    @Override
+    public void deleteProduct(DiscountCard card, Long id) throws ClassNotFoundException {
+        if (checkRepository.findById(id).isPresent() && discountCardRepository.findById(id).isPresent()) {
+            checkRepository.findById(id).get().getProducts().remove(discountCardRepository.findById(id).get());
+        } else {
+            throw new ClassNotFoundException("Check with this id not found");
+        }
+    }
+
+    @Override
+    public void deleteCard(DiscountCard card, Long id) throws ClassNotFoundException {
+
+    }
+
+    @Override
+    public void getSum(Long id) throws ClassNotFoundException {
+
     }
 }
