@@ -40,6 +40,7 @@ public class DiscountCardService implements DiscountCardServiceInterface {
         DiscountCard existDiscountCard = discountCardRepository.findById(id).orElse(null);
         if (existDiscountCard != null) {
             existDiscountCard.setCardNumber(discountCard.getCardNumber());
+            existDiscountCard.setDiscountPercent(discountCard.getDiscountPercent());
             discountCardRepository.save(existDiscountCard);
         } else {
             throw new ClassNotFoundException("Discount card with this id not found");

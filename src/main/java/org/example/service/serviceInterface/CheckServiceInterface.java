@@ -22,9 +22,9 @@ public interface CheckServiceInterface {
 
     void addCard (DiscountCard card, Long id) throws ClassNotFoundException;
 
-    void deleteProduct (DiscountCard card, Long id) throws ClassNotFoundException;
+    void deleteProduct (Long checkId , Long productId) throws ClassNotFoundException;
 
-    void deleteCard (DiscountCard card, Long id) throws ClassNotFoundException;
+    void deleteCard (Long checkId, Long cardId) throws ClassNotFoundException;
 
-    void getSum (Long id) throws ClassNotFoundException;
+    Long getSum (Long id) throws ClassNotFoundException;
 }

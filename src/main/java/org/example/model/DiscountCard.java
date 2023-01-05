@@ -21,6 +21,8 @@ public class DiscountCard {
 
     private Long cardNumber;
 
+    private Integer discountPercent;
+
     @OneToMany
     private List<Check> checks;
 }

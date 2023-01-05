@@ -87,21 +87,33 @@ public class CheckService implements CheckServiceInterface {
     }
 
     @Override
-    public void deleteProduct(DiscountCard card, Long id) throws ClassNotFoundException {
-        if (checkRepository.findById(id).isPresent() && discountCardRepository.findById(id).isPresent()) {
-            checkRepository.findById(id).get().getProducts().remove(discountCardRepository.findById(id).get());
+    public void deleteProduct(Long checkId , Long productId) throws ClassNotFoundException {
+        if (checkRepository.findById(checkId).isPresent() && productRepository.findById(productId).isPresent()) {
+            checkRepository.findById(checkId).get().getProducts().remove(productRepository.findById(productId).get());
         } else {
             throw new ClassNotFoundException("Check with this id not found");
         }
     }
 
     @Override
-    public void deleteCard(DiscountCard card, Long id) throws ClassNotFoundException {
-
+    public void deleteCard(Long checkId, Long cardId) throws ClassNotFoundException {
+        if (checkRepository.findById(checkId).isPresent() && discountCardRepository.findById(cardId).isPresent()) {
+            checkRepository.findById(checkId).get().setDiscountCard(new DiscountCard());
+        } else {
+            throw new ClassNotFoundException("Check with this id not found");
+        }
     }
 
     @Override
-    public void getSum(Long id) throws ClassNotFoundException {
-
+    public Long getSum(Long id) throws ClassNotFoundException {
+        if (checkRepository.findById(id).isPresent()) {
+            long sum = 0;
+            for (Product product : checkRepository.findById(id).get().getProducts()) {
+                sum = sum + product.getPrice();
+            }
+            return sum;
+        } else {
+            throw new ClassNotFoundException("Check with this id not found");
+        }
     }
 }
